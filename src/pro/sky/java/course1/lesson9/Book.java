@@ -4,14 +4,27 @@ import java.util.Objects;
 
 public class Book {
 
-    Author author;
-    String nameOfBook;
+    private final Author author;
+    private final String nameOfBook;
     int dateOfPublish;
     public Book(String nameOfBook, Author author, int dateOfPublish) {
         this.nameOfBook = nameOfBook;
         this.author = author;
         this.dateOfPublish = dateOfPublish;
     }
+
+    public String getNameOfBook() {
+        return nameOfBook;
+    }
+
+    public int getDateOfPublish() {
+        return dateOfPublish;
+    }
+
+    public void setDateOfPublish(int dateOfPublish) {
+        this.dateOfPublish = dateOfPublish;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

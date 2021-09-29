@@ -5,11 +5,11 @@ import java.util.Objects;
 public class Author {
 
 
-    private String authorName;
-    private String authorNameTwo;
-    private String authorNameThree;
-    private String authorSurname;
-    private String authorFullName;
+    private final String authorName;
+    private  String authorNameTwo;
+    private  String authorNameThree;
+    private  String authorSurname;
+    private  String authorFullName;
 
         public Author(String authorName,String authorNameTwo ,String authorNameThree , String authorSurname) {
         this.authorName = authorName;
@@ -36,4 +36,35 @@ public class Author {
         return "Author:" + authorFullName.replace("null ", "") ;
     }
 
+    public String getAuthorNameTwo() {
+        return authorNameTwo;
+    }
+
+    public void setAuthorNameTwo(String authorNameTwo) {
+        this.authorNameTwo = authorNameTwo;
+    }
+
+    public String getAuthorNameThree() {
+        return authorNameThree;
+    }
+
+    public void setAuthorNameThree(String authorNameThree) {
+        this.authorNameThree = authorNameThree;
+    }
+
+    public String getAuthorSurname() {
+        return authorSurname;
+    }
+
+    public void setAuthorSurname(String authorSurname) {
+        this.authorSurname = authorSurname;
+    }
+
+    public String getAuthorFullName() {
+        return authorFullName;
+    }
+
+    public void setAuthorFullName(String authorFullName) {
+        this.authorFullName = authorFullName;
+    }
 }

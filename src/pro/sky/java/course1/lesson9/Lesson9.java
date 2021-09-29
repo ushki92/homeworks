@@ -30,11 +30,9 @@ public class Lesson9 {
         System.out.println("==============================");
 
         Libryary librayary = new Libryary(2);
-        librayary.AddNewBook(bookOne);
-        librayary.AddNewBook(bookTwo);
+        librayary.addNewBook(bookOne);
+        librayary.addNewBook(bookTwo);
         System.out.println(librayary);
-
-
     }
 
 }
