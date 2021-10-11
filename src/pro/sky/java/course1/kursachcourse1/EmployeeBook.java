@@ -25,25 +25,42 @@ public class EmployeeBook {
     }
 
     public void changeEmployeeSalaryByName(String name, int newSalary) {
-        for (int i = 0; i < employees.length - 1; i++)
-            if (employees[i].getName().equals(name)) {
-                employees[i].setSalary(newSalary);
-                return;
-            } else {
-                System.out.println("Не найден");
+        int counter1 = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getName().equals(name)) {
+                counter1++;
             }
+        }
+        if (counter1 > 0) {
+            for (int i = 0; i < employees.length - 1; i++)
+                if (employees[i].getName().equals(name)) {
+                    employees[i].setSalary(newSalary);
+                    return;
+                }
+        } else {
+                    System.out.println("Not found Employee");
+                }
+
     }
 
     public void changeEmployeeDepartmentByName(String name, int newDepartment) {
+        int counter1 = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getName().equals(name)) {
+                counter1++;
+            }
+        }
+        if (counter1 > 0) {
         for (int i = 0; i < employees.length - 1; i++)
             if (employees[i].getName().equals(name)) {
                 employees[i].setDepartment(newDepartment);
                 return;
-            } else {
-                System.out.println("Не найден");
             }
-
-    }
+        }
+        else {
+                System.out.println("Not found Employee");
+            }
+        }
 
 
     public void addNewEmployee(Employee employee) {
@@ -61,12 +78,12 @@ public class EmployeeBook {
     }
 
     public void deleteEmployee(Employee employee) {
-        int b = 0;
+        int counter1 = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].equals(employee))
-            { b++; }
+            { counter1++; }
         }
-        if (b > 0) {
+        if (counter1 > 0) {
             for (int a = 0; a < employees.length; a++) {
                 if (employees[a] != null && employees[a].equals(employee)) {
                     employees[a] = null;
@@ -106,29 +123,29 @@ public class EmployeeBook {
         System.out.println(print);
     }
 
-    public int calculateAllSpendings() {
+    public float calculateAllSpendings() {
         float totalSalary = 0;
         for (Employee employee : employees) {
             if (employee != null) {
                 totalSalary += employee.getSalary();
             }
         }
-        return (int) totalSalary;
+        return  totalSalary;
     }
 
-    public int calculateAverageSpendings() {
+    public float calculateAverageSpendings() {
         float totalSalary = 0;
         for (Employee employee : employees) {
             if (employee != null) {
                 totalSalary += employee.getSalary();
             }
         }
-        return (int) (totalSalary / employees.length);
+        return  totalSalary / employees.length;
     }
 
     public Employee findMinSalary() {
         Employee minSalaryEmployee = null;
-        float minSalary = 100_000_000;
+        float minSalary = Float.MAX_VALUE;
         for (Employee employee : employees) {
             if (employee != null) {
                 if ( minSalary > employee.getSalary()) {
@@ -178,16 +195,17 @@ public class EmployeeBook {
 
     public void changeAllSalaries(int percent) {
         float newSalary;
+        float multiplier = percent/100f;
         for (Employee employee : employees) {
             if (employee != null) {
-                newSalary = employee.getSalary() + employee.getSalary() * (percent / 100);
+                newSalary = employee.getSalary() + employee.getSalary() * multiplier;
                 employee.setSalary(newSalary);
             }
         }
     }
 
-    public String calculateMinSalaryDepartment(int department) {
-        StringBuilder minSalaryDepartmentName = new StringBuilder();
+    public Employee findMinSalaryDepartment(int department) {
+        Employee minSalaryDepartmentName = null;
         float minSalary = Float.MAX_VALUE;
         for (int i = 0; i < employees.length - 1; i++) {
             if (employees[i] != null && minSalary > employees[i].getSalary() && employees[i].getDepartment() == department) {
@@ -197,15 +215,15 @@ public class EmployeeBook {
         }
         for (int i = 0; i < employees.length - 1; i++) {
             if (employees[i] != null && minSalary == employees[i].getSalary() && employees[i].getDepartment() == department) {
-                minSalaryDepartmentName.append(employees[i]);
+                minSalaryDepartmentName = employees[i];
             }
 
         }
-        return minSalaryDepartmentName.toString();
+        return minSalaryDepartmentName;
     }
 
-    public String calculateMaxSalaryDepartment(int department) {
-        StringBuilder maxSalaryDepartmentName = new StringBuilder();
+    public Employee findMaxSalaryDepartment(int department) {
+        Employee maxSalaryDepartmentName = null;
         float maxSalary = 0;
         for (Employee employee : employees) {
             if (employee != null && maxSalary < employee.getSalary() && employee.getDepartment() == department) {
@@ -215,11 +233,11 @@ public class EmployeeBook {
         }
         for (Employee employee : employees) {
             if (employee != null && maxSalary == employee.getSalary() && employee.getDepartment() == department) {
-                maxSalaryDepartmentName.append(employee);
+                maxSalaryDepartmentName = employee;
             }
 
         }
-        return maxSalaryDepartmentName.toString();
+        return maxSalaryDepartmentName;
     }
 
     public float calculateDepartmentSalarySpendings(int department) {
@@ -244,9 +262,10 @@ public class EmployeeBook {
     }
     public void changeDepartmentSalaries(int percent, int department) {
         float newSalary;
+        float multiplier = percent/100f;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartment() == department) {
-                newSalary = employee.getSalary() + employee.getSalary() * (percent / 100);
+                newSalary = employee.getSalary() + employee.getSalary() * multiplier;
                 employee.setSalary(newSalary);
             }
         }
