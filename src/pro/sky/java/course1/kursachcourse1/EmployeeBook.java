@@ -1,7 +1,5 @@
 package pro.sky.java.course1.kursachcourse1;
 
-import java.util.Arrays;
-
 public class EmployeeBook {
 
     private final Employee[] employees;
@@ -128,8 +126,8 @@ public class EmployeeBook {
         return (int) (totalSalary / employees.length);
     }
 
-    public String calculateMinSalary() {
-        StringBuilder minSalaryEmployeeName = new StringBuilder();
+    public Employee findMinSalary() {
+        Employee minSalaryEmployee = null;
         float minSalary = 100_000_000;
         for (Employee employee : employees) {
             if (employee != null) {
@@ -141,15 +139,15 @@ public class EmployeeBook {
         for (Employee employee : employees) {
             if (employee != null) {
                 if (minSalary == employee.getSalary()) {
-                    minSalaryEmployeeName.append(employee);
+                    minSalaryEmployee = employee;
                 }
             }
         }
-        return minSalaryEmployeeName.toString();
+        return minSalaryEmployee;
     }
 
-    public String calculateMaxSalary() {
-        StringBuilder maxSalaryEmployeeName = new StringBuilder();
+    public Employee findMaxSalaryEmployee() {
+        Employee maxSalaryEmployee = null;
         float maxSalary = 0;
         for (Employee employee : employees) {
             if (employee != null) {
@@ -161,11 +159,11 @@ public class EmployeeBook {
         for (Employee employee : employees) {
             if (employee != null) {
                 if (maxSalary == employee.getSalary()) {
-                    maxSalaryEmployeeName.append(employee);
+                    maxSalaryEmployee = employee;
                 }
             }
         }
-        return maxSalaryEmployeeName.toString();
+        return maxSalaryEmployee;
     }
 
     public void printAllEmployeesNames() {
@@ -190,7 +188,7 @@ public class EmployeeBook {
 
     public String calculateMinSalaryDepartment(int department) {
         StringBuilder minSalaryDepartmentName = new StringBuilder();
-        float minSalary = 100_000_000;
+        float minSalary = Float.MAX_VALUE;
         for (int i = 0; i < employees.length - 1; i++) {
             if (employees[i] != null && minSalary > employees[i].getSalary() && employees[i].getDepartment() == department) {
                 minSalary = employees[i].getSalary();

@@ -36,9 +36,7 @@ public class KursachCourse1 {
         employeeBook.deleteEmployeeName(employee6.getName());
         employeeBook.printAllEmployees();
         System.out.println(employeeBook.calculateAllSpendings());
-        System.out.println(employeeBook.calculateMinSalary());
         System.out.println(employeeBook.calculateAverageSpendings());
-        System.out.println(employeeBook.calculateMaxSalary());
         employeeBook.printAllEmployeesNames();
         employeeBook.changeAllSalaries(10);
         System.out.println(employeeBook.calculateMinSalaryDepartment(1));
