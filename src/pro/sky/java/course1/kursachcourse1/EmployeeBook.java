@@ -6,6 +6,10 @@ public class EmployeeBook {
 
     private final Employee[] employees;
 
+
+
+    public int counter;
+
     public EmployeeBook(int size) {
         this.employees = new Employee[size];
     }
@@ -45,29 +49,55 @@ public class EmployeeBook {
 
 
     public void addNewEmployee(Employee employee) {
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) {
-                employees[i] = employee;
-                return;
+            if (counter >= employees.length) {
+                System.out.println("WARNING NO FREE SPACE");
+            } else {
+                for (int i = 0; i < employees.length; i++) {
+                    if (employees[i] == null) {
+                        employees[i] = employee;
+                        counter++;
+                        return;
+                    }
+                }
             }
-        }
     }
 
     public void deleteEmployee(Employee employee) {
+        int b = 0;
         for (int i = 0; i < employees.length; i++) {
-
-            if (employees[i] != null && employees[i].equals(employee)) {
-                employees[i] = null;
+            if (employees[i] != null && employees[i].equals(employee))
+            { b++; }
+        }
+        if (b > 0) {
+            for (int a = 0; a < employees.length; a++) {
+                if (employees[a] != null && employees[a].equals(employee)) {
+                    employees[a] = null;
+                    counter--;
+                }
             }
+        } else {
+            System.out.println("Not found Employee");
+        }
+        }
+
+    public void deleteEmployeeName(String name) {
+        int b = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getName().equals(name)) {
+                b++;
+            }
+        }
+            if (b > 0) {
+        for (int a = 0; a < employees.length - 1; a++)
+            if (employees[a] != null && employees[a].getName().equals(name)) {
+                employees[a] = null;
+            }
+    }
+        else {
+            System.out.println("Not found Employee");
         }
     }
 
-    public void deleteEmployeeName(String name) {
-        for (int i = 0; i < employees.length - 1; i++)
-            if (employees[i] != null && employees[i].getName().equals(name)) {
-                employees[i] = null;
-            }
-    }
     public void printAllEmployees() {
         StringBuilder print = new StringBuilder("Employees " + System.lineSeparator());
         for (Employee employee : employees) {
@@ -148,11 +178,11 @@ public class EmployeeBook {
         System.out.println(print);
     }
 
-    public void changeAllSalaries(float incr) {
+    public void changeAllSalaries(int percent) {
         float newSalary;
         for (Employee employee : employees) {
             if (employee != null) {
-                newSalary = employee.getSalary() + employee.getSalary() * (incr / 100);
+                newSalary = employee.getSalary() + employee.getSalary() * (percent / 100);
                 employee.setSalary(newSalary);
             }
         }
@@ -214,11 +244,11 @@ public class EmployeeBook {
         }
         return totalSalary/counter;
     }
-    public void changeDepartmentSalaries(float incr, int department) {
+    public void changeDepartmentSalaries(int percent, int department) {
         float newSalary;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartment() == department) {
-                newSalary = employee.getSalary() + employee.getSalary() * (incr / 100);
+                newSalary = employee.getSalary() + employee.getSalary() * (percent / 100);
                 employee.setSalary(newSalary);
             }
         }

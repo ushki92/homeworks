@@ -1,5 +1,7 @@
 package pro.sky.java.course1.kursachcourse1;
 
+import java.util.Objects;
+
 public class Employee {
     private  static int counter;
     private final String name;
@@ -13,6 +15,14 @@ public class Employee {
         return name + ' ' + department +
                 " " + salary +
                 " " + id + System.lineSeparator();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return department == employee.department && Float.compare(employee.salary, salary) == 0 && id == employee.id && Objects.equals(name, employee.name);
     }
 
     public Employee(String name, int department, int salary) {
@@ -44,4 +54,5 @@ public class Employee {
     public void setSalary(float salary) {
         this.salary = salary;
     }
+
 }

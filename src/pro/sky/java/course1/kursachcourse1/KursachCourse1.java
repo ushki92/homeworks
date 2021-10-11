@@ -26,10 +26,13 @@ public class KursachCourse1 {
         employeeBook.addNewEmployee(employee8);
         employeeBook.addNewEmployee(employee9);
         employeeBook.addNewEmployee(employee10);
+
         employeeBook.printEmployeesByDepartments(2);
         employeeBook.changeEmployeeSalaryByName(employee1.getName(), 12345);
         employeeBook.changeEmployeeDepartmentByName(employee1.getName(), 2);
         employeeBook.deleteEmployee(employee5);
+        employeeBook.deleteEmployee(employee5);
+        employeeBook.deleteEmployeeName(employee6.getName());
         employeeBook.deleteEmployeeName(employee6.getName());
         employeeBook.printAllEmployees();
         System.out.println(employeeBook.calculateAllSpendings());
@@ -37,7 +40,7 @@ public class KursachCourse1 {
         System.out.println(employeeBook.calculateAverageSpendings());
         System.out.println(employeeBook.calculateMaxSalary());
         employeeBook.printAllEmployeesNames();
-        employeeBook.changeAllSalaries(10f);
+        employeeBook.changeAllSalaries(10);
         System.out.println(employeeBook.calculateMinSalaryDepartment(1));
         System.out.println(employeeBook.calculateMaxSalaryDepartment(1));
         System.out.println(employeeBook.calculateDepartmentSalarySpendings(1));
