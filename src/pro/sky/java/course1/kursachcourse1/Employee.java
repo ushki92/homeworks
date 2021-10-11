@@ -8,6 +8,13 @@ public class Employee {
     private final int id;
 
 
+    @Override
+    public String toString() {
+        return name + ' ' + department +
+                " " + salary +
+                " " + id + System.lineSeparator();
+    }
+
     public Employee(String name, int department, int salary) {
         this.name = name;
         this.department = department;

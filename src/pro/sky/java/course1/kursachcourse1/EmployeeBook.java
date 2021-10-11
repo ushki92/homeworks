@@ -10,22 +10,16 @@ public class EmployeeBook {
         this.employees = new Employee[size];
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EmployeeBook that = (EmployeeBook) o;
-        return Arrays.equals(employees, that.employees);
-    }
+
 
     public void printEmployeesByDepartments(int department) {
         StringBuilder print = new StringBuilder("Employees from department " + department + System.lineSeparator());
         for (Employee employee : employees) {
             if (employee != null && department == employee.getDepartment()) {
-                print.append(employee.getName()).append(" ").append(" ").append(employee.getSalary()).append(" ").append(employee.getId()).append(System.lineSeparator());
+                print.append(employee);
+                System.out.println(print);
             }
         }
-        System.out.println(print);
     }
 
     public void changeEmployeeSalaryByName(String name, int newSalary) {
@@ -33,13 +27,18 @@ public class EmployeeBook {
             if (employees[i].getName().equals(name)) {
                 employees[i].setSalary(newSalary);
                 return;
+            } else {
+                System.out.println("Не найден");
             }
     }
+
     public void changeEmployeeDepartmentByName(String name, int newDepartment) {
         for (int i = 0; i < employees.length - 1; i++)
             if (employees[i].getName().equals(name)) {
                 employees[i].setDepartment(newDepartment);
                 return;
+            } else {
+                System.out.println("Не найден");
             }
 
     }
@@ -73,70 +72,70 @@ public class EmployeeBook {
         StringBuilder print = new StringBuilder("Employees " + System.lineSeparator());
         for (Employee employee : employees) {
             if (employee != null) {
-                print.append(employee.getName()).append(" ").append(employee.getDepartment()).append(" ").append(employee.getSalary()).append(" ").append(employee.getId()).append(System.lineSeparator());
+                print.append(employee);
             }
         }
         System.out.println(print);
     }
 
     public int calculateAllSpendings() {
-        float a = 0;
+        float totalSalary = 0;
         for (Employee employee : employees) {
             if (employee != null) {
-                a = a + employee.getSalary();
+                totalSalary += employee.getSalary();
             }
         }
-        return (int) a;
+        return (int) totalSalary;
     }
 
-    public int averageSpendings() {
-        float a = 0;
+    public int calculateAverageSpendings() {
+        float totalSalary = 0;
         for (Employee employee : employees) {
             if (employee != null) {
-                a = a + employee.getSalary();
+                totalSalary += employee.getSalary();
             }
         }
-        return (int) (a / employees.length);
+        return (int) (totalSalary / employees.length);
     }
 
-    public String minSalary() {
-        StringBuilder a = new StringBuilder();
-        float b = 100_000_000;
+    public String calculateMinSalary() {
+        StringBuilder minSalaryEmployeeName = new StringBuilder();
+        float minSalary = 100_000_000;
         for (Employee employee : employees) {
             if (employee != null) {
-                if (b > employee.getSalary()) {
-                    b = employee.getSalary();
+                if ( minSalary > employee.getSalary()) {
+                    minSalary = employee.getSalary();
                 }
             }
         }
         for (Employee employee : employees) {
             if (employee != null) {
-                if (b == employee.getSalary()) {
-                    a.append(employee.getName()).append(" ").append(employee.getDepartment()).append(" ").append(employee.getSalary()).append(System.lineSeparator());
+                if (minSalary == employee.getSalary()) {
+                    minSalaryEmployeeName.append(employee);
                 }
             }
         }
-        return a.toString();
+        return minSalaryEmployeeName.toString();
     }
 
-    public String maxSalary() {
-        StringBuilder a = new StringBuilder();
-        float b = 0;
+    public String calculateMaxSalary() {
+        StringBuilder maxSalaryEmployeeName = new StringBuilder();
+        float maxSalary = 0;
         for (Employee employee : employees) {
             if (employee != null) {
-                if (b < employee.getSalary()) {
-                    b = employee.getSalary();
+                if (maxSalary < employee.getSalary()) {
+                    maxSalary = employee.getSalary();
                 }
             }
         }
         for (Employee employee : employees) {
             if (employee != null) {
-                if (b == employee.getSalary()) {
-                    a.append(employee.getName()).append(" ").append(employee.getDepartment()).append(" ").append(employee.getSalary()).append(System.lineSeparator());
+                if (maxSalary == employee.getSalary()) {
+                    maxSalaryEmployeeName.append(employee);
                 }
             }
         }
-        return a.toString();
+        return maxSalaryEmployeeName.toString();
     }
 
     public void printAllEmployeesNames() {
@@ -150,96 +149,96 @@ public class EmployeeBook {
     }
 
     public void changeAllSalaries(float incr) {
-        float a;
+        float newSalary;
         for (Employee employee : employees) {
             if (employee != null) {
-                a = employee.getSalary() + employee.getSalary() * (incr / 100);
-                employee.setSalary(a);
+                newSalary = employee.getSalary() + employee.getSalary() * (incr / 100);
+                employee.setSalary(newSalary);
             }
         }
     }
 
-    public String minSalaryDepartment(int department) {
-        StringBuilder a = new StringBuilder();
-        float b = 100_000_000;
+    public String calculateMinSalaryDepartment(int department) {
+        StringBuilder minSalaryDepartmentName = new StringBuilder();
+        float minSalary = 100_000_000;
         for (int i = 0; i < employees.length - 1; i++) {
-            if (employees[i] != null && b > employees[i].getSalary() && employees[i].getDepartment() == department) {
-                b = employees[i].getSalary();
+            if (employees[i] != null && minSalary > employees[i].getSalary() && employees[i].getDepartment() == department) {
+                minSalary = employees[i].getSalary();
 
             }
         }
         for (int i = 0; i < employees.length - 1; i++) {
-            if (employees[i] != null && b == employees[i].getSalary() && employees[i].getDepartment() == department) {
-                a.append(employees[i].getName()).append(" ").append(employees[i].getSalary()).append(System.lineSeparator());
+            if (employees[i] != null && minSalary == employees[i].getSalary() && employees[i].getDepartment() == department) {
+                minSalaryDepartmentName.append(employees[i]);
             }
 
         }
-        return a.toString();
+        return minSalaryDepartmentName.toString();
     }
 
-    public String maxSalaryDepartment(int department) {
-        StringBuilder a = new StringBuilder();
-        float b = 0;
+    public String calculateMaxSalaryDepartment(int department) {
+        StringBuilder maxSalaryDepartmentName = new StringBuilder();
+        float maxSalary = 0;
         for (Employee employee : employees) {
-            if (employee != null && b < employee.getSalary() && employee.getDepartment() == department) {
-                b = employee.getSalary();
+            if (employee != null && maxSalary < employee.getSalary() && employee.getDepartment() == department) {
+                maxSalary = employee.getSalary();
 
             }
         }
         for (Employee employee : employees) {
-            if (employee != null && b == employee.getSalary() && employee.getDepartment() == department) {
-                a.append(employee.getName()).append(" ").append(employee.getSalary()).append(System.lineSeparator());
+            if (employee != null && maxSalary == employee.getSalary() && employee.getDepartment() == department) {
+                maxSalaryDepartmentName.append(employee);
             }
 
         }
-        return a.toString();
+        return maxSalaryDepartmentName.toString();
     }
 
-    public float departmentSalarySpendings(int department) {
-        float b = 0;
+    public float calculateDepartmentSalarySpendings(int department) {
+        float totalSpendings = 0;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartment() == department) {
-                b = b + employee.getSalary();
+                totalSpendings += employee.getSalary();
             }
         }
-        return b;
+        return totalSpendings;
     }
-    public float departmentAverageSalarySpendings (int department) {
-        float b = 0;
-        float c = 0;
+    public float calculateDepartmentAverageSalarySpendings (int department) {
+        float totalSalary = 0;
+        float counter = 0;
         for (Employee employee : employees) {
             if (employee != null &&employee.getDepartment() == department) {
-                b = b + employee.getSalary();
-                c++;
+                totalSalary += employee.getSalary();
+                counter++;
             }
         }
-        return b/c;
+        return totalSalary/counter;
     }
     public void changeDepartmentSalaries(float incr, int department) {
-        float a;
+        float newSalary;
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartment() == department) {
-                a = employee.getSalary() + employee.getSalary() * (incr / 100);
-                employee.setSalary(a);
+                newSalary = employee.getSalary() + employee.getSalary() * (incr / 100);
+                employee.setSalary(newSalary);
             }
         }
     }
-    public String salaryToValueLess(float value) {
-        StringBuilder a = new StringBuilder();
+    public void printEmployeesWithSalaryToValueLess(float value) {
+        StringBuilder employeeLessToValue = new StringBuilder();
         for (Employee employee : employees) {
-            if (employee != null &&value > employee.getSalary()) {
-                a.append(employee.getName()).append(" ").append(employee.getSalary()).append(employee.getId()).append(System.lineSeparator());
+            if (employee != null && value > employee.getSalary()) {
+                employeeLessToValue.append(employee);
             }
         }
-        return a.toString();
+        System.out.println(employeeLessToValue);
     }
-    public String salaryToValueMoreOrEqual(float value) {
-        StringBuilder a = new StringBuilder();
+    public void printEmployeesWithSalaryToValueMoreOrEqual(float value) {
+        StringBuilder employeeMoreToValue = new StringBuilder();
         for (Employee employee : employees) {
             if (employee != null && value <= employee.getSalary()) {
-                a.append(employee.getName()).append(" ").append(employee.getSalary()).append(employee.getId()).append(System.lineSeparator());
+                employeeMoreToValue.append(employee);
             }
         }
-        return a.toString();
+        System.out.println(employeeMoreToValue);
     }
 }

@@ -33,18 +33,18 @@ public class KursachCourse1 {
         employeeBook.deleteEmployeeName(employee6.getName());
         employeeBook.printAllEmployees();
         System.out.println(employeeBook.calculateAllSpendings());
-        System.out.println(employeeBook.minSalary());
-        System.out.println(employeeBook.averageSpendings());
-        System.out.println(employeeBook.maxSalary());
+        System.out.println(employeeBook.calculateMinSalary());
+        System.out.println(employeeBook.calculateAverageSpendings());
+        System.out.println(employeeBook.calculateMaxSalary());
         employeeBook.printAllEmployeesNames();
         employeeBook.changeAllSalaries(10f);
-        System.out.println(employeeBook.minSalaryDepartment(1));
-        System.out.println(employeeBook.maxSalaryDepartment(1));
-        System.out.println(employeeBook.departmentSalarySpendings(1));
-        System.out.println(employeeBook.departmentAverageSalarySpendings(1));
+        System.out.println(employeeBook.calculateMinSalaryDepartment(1));
+        System.out.println(employeeBook.calculateMaxSalaryDepartment(1));
+        System.out.println(employeeBook.calculateDepartmentSalarySpendings(1));
+        System.out.println(employeeBook.calculateDepartmentAverageSalarySpendings(1));
         employeeBook.changeDepartmentSalaries(10,1);
-        System.out.println(employeeBook.salaryToValueLess(1000001));
-        System.out.println(employeeBook.salaryToValueMoreOrEqual(100000));
+        employeeBook.printEmployeesWithSalaryToValueLess(100000);
+        employeeBook.printEmployeesWithSalaryToValueMoreOrEqual(100000);
         employeeBook.printAllEmployeesNames();
 
 
