@@ -6,7 +6,7 @@ public class EmployeeBook {
 
 
 
-    public int counter;
+    private int counter;
 
     public EmployeeBook(int size) {
         this.employees = new Employee[size];
@@ -25,48 +25,28 @@ public class EmployeeBook {
     }
 
     public void changeEmployeeSalaryByName(String name, int newSalary) {
-        int counter1 = 0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getName().equals(name)) {
-                counter1++;
-            }
-        }
-        if (counter1 > 0) {
-            for (int i = 0; i < employees.length - 1; i++)
-                if (employees[i].getName().equals(name)) {
+            for (int i = 0; i <= employees.length - 1; i++) {
+                if (employees[i] != null && employees[i].getName().equals(name)) {
                     employees[i].setSalary(newSalary);
                     return;
                 }
-        } else {
-                    System.out.println("Not found Employee");
-                }
-
+            }
+        System.out.println("Not found Employee");
     }
 
     public void changeEmployeeDepartmentByName(String name, int newDepartment) {
-        int counter1 = 0;
-        for (int i = 0; i < employees.length; i++) {
+        for (int i = 0; i <= employees.length - 1; i++) {
             if (employees[i] != null && employees[i].getName().equals(name)) {
-                counter1++;
-            }
-        }
-        if (counter1 > 0) {
-        for (int i = 0; i < employees.length - 1; i++)
-            if (employees[i].getName().equals(name)) {
                 employees[i].setDepartment(newDepartment);
                 return;
             }
         }
-        else {
-                System.out.println("Not found Employee");
-            }
+            System.out.println("Not found Employee");
+
         }
 
 
     public void addNewEmployee(Employee employee) {
-            if (counter >= employees.length) {
-                System.out.println("WARNING NO FREE SPACE");
-            } else {
                 for (int i = 0; i < employees.length; i++) {
                     if (employees[i] == null) {
                         employees[i] = employee;
@@ -74,44 +54,30 @@ public class EmployeeBook {
                         return;
                     }
                 }
+                System.out.println("WARNING NO FREE SPACE");
             }
-    }
 
     public void deleteEmployee(Employee employee) {
-        int counter1 = 0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].equals(employee))
-            { counter1++; }
-        }
-        if (counter1 > 0) {
-            for (int a = 0; a < employees.length; a++) {
-                if (employees[a] != null && employees[a].equals(employee)) {
-                    employees[a] = null;
-                    counter--;
-                }
+        for (int a = 0; a < employees.length; a++) {
+            if (employees[a] != null && employees[a].equals(employee)) {
+                employees[a] = null;
+                counter--;
+                return;
             }
-        } else {
-            System.out.println("Not found Employee");
         }
-        }
+        System.out.println("Not found Employee");
+    }
 
     public void deleteEmployeeName(String name) {
-        int b = 0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getName().equals(name)) {
-                b++;
-            }
-        }
-            if (b > 0) {
-        for (int a = 0; a < employees.length - 1; a++)
+        for (int a = 0; a < employees.length - 1; a++) {
             if (employees[a] != null && employees[a].getName().equals(name)) {
                 employees[a] = null;
+                counter--;
+                return;
             }
-    }
-        else {
+        }
             System.out.println("Not found Employee");
         }
-    }
 
     public void printAllEmployees() {
         StringBuilder print = new StringBuilder("Employees " + System.lineSeparator());
@@ -134,28 +100,16 @@ public class EmployeeBook {
     }
 
     public float calculateAverageSpendings() {
-        float totalSalary = 0;
-        for (Employee employee : employees) {
-            if (employee != null) {
-                totalSalary += employee.getSalary();
-            }
-        }
-        return  totalSalary / employees.length;
+        return  calculateAllSpendings() / counter;
     }
 
-    public Employee findMinSalary() {
+    public Employee findMinSalaryEmployee() {
         Employee minSalaryEmployee = null;
         float minSalary = Float.MAX_VALUE;
         for (Employee employee : employees) {
             if (employee != null) {
                 if ( minSalary > employee.getSalary()) {
                     minSalary = employee.getSalary();
-                }
-            }
-        }
-        for (Employee employee : employees) {
-            if (employee != null) {
-                if (minSalary == employee.getSalary()) {
                     minSalaryEmployee = employee;
                 }
             }
@@ -170,12 +124,6 @@ public class EmployeeBook {
             if (employee != null) {
                 if (maxSalary < employee.getSalary()) {
                     maxSalary = employee.getSalary();
-                }
-            }
-        }
-        for (Employee employee : employees) {
-            if (employee != null) {
-                if (maxSalary == employee.getSalary()) {
                     maxSalaryEmployee = employee;
                 }
             }
@@ -194,9 +142,9 @@ public class EmployeeBook {
     }
 
     public void changeAllSalaries(int percent) {
-        float newSalary;
-        float multiplier = percent/100f;
         for (Employee employee : employees) {
+            float newSalary;
+            float multiplier = percent/100f;
             if (employee != null) {
                 newSalary = employee.getSalary() + employee.getSalary() * multiplier;
                 employee.setSalary(newSalary);
@@ -204,38 +152,28 @@ public class EmployeeBook {
         }
     }
 
-    public Employee findMinSalaryDepartment(int department) {
+    public Employee findMinSalaryEmployeeOfDepartment(int department) {
         Employee minSalaryDepartmentName = null;
         float minSalary = Float.MAX_VALUE;
         for (int i = 0; i < employees.length - 1; i++) {
             if (employees[i] != null && minSalary > employees[i].getSalary() && employees[i].getDepartment() == department) {
                 minSalary = employees[i].getSalary();
-
-            }
-        }
-        for (int i = 0; i < employees.length - 1; i++) {
-            if (employees[i] != null && minSalary == employees[i].getSalary() && employees[i].getDepartment() == department) {
                 minSalaryDepartmentName = employees[i];
-            }
 
+            }
         }
         return minSalaryDepartmentName;
     }
 
-    public Employee findMaxSalaryDepartment(int department) {
+    public Employee findMaxSalaryEmployeeOfDepartment(int department) {
         Employee maxSalaryDepartmentName = null;
         float maxSalary = 0;
         for (Employee employee : employees) {
             if (employee != null && maxSalary < employee.getSalary() && employee.getDepartment() == department) {
                 maxSalary = employee.getSalary();
-
-            }
-        }
-        for (Employee employee : employees) {
-            if (employee != null && maxSalary == employee.getSalary() && employee.getDepartment() == department) {
                 maxSalaryDepartmentName = employee;
-            }
 
+            }
         }
         return maxSalaryDepartmentName;
     }
@@ -251,7 +189,7 @@ public class EmployeeBook {
     }
     public float calculateDepartmentAverageSalarySpendings (int department) {
         float totalSalary = 0;
-        float counter = 0;
+        int counter = 0;
         for (Employee employee : employees) {
             if (employee != null &&employee.getDepartment() == department) {
                 totalSalary += employee.getSalary();
@@ -261,9 +199,9 @@ public class EmployeeBook {
         return totalSalary/counter;
     }
     public void changeDepartmentSalaries(int percent, int department) {
-        float newSalary;
         float multiplier = percent/100f;
         for (Employee employee : employees) {
+            float newSalary;
             if (employee != null && employee.getDepartment() == department) {
                 newSalary = employee.getSalary() + employee.getSalary() * multiplier;
                 employee.setSalary(newSalary);

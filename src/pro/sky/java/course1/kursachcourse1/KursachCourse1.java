@@ -9,8 +9,8 @@ public class KursachCourse1 {
         Employee employee1 = new Employee("Ivan Ivanovich Ivanov ", 1, 100000);
         Employee employee2 = new Employee("Sergey Sergeevich Sergeev", 2, 10000);
         Employee employee3 = new Employee("Uiriy Uirevuch Uiriev", 3, 100002);
-        Employee employee4 = new Employee("Anna Ivanovna Ivanova", 1, 10000);
-        Employee employee5 = new Employee("Anna Ivanovna Ivanova", 1, 1000);
+        Employee employee4 = new Employee("Anna Ivanov Ivanova", 1, 10000);
+        Employee employee5 = new Employee("Anna Ivanovn Ivanova", 1, 1000);
         Employee employee6 = new Employee("Anna Ivanovna Ivanova", 1, 100);
         Employee employee7 = new Employee("Uiriy Sergeevich Sergeev", 4, 100007);
         Employee employee8 = new Employee("Genadziy Sergeevich Sergeev", 1, 100);
@@ -28,7 +28,7 @@ public class KursachCourse1 {
         employeeBook.addNewEmployee(employee10);
 
         employeeBook.printEmployeesByDepartments(2);
-        employeeBook.changeEmployeeSalaryByName(employee9.getName(), 12345);
+        employeeBook.changeEmployeeSalaryByName(employee10.getName(), 12345);
         employeeBook.changeEmployeeDepartmentByName(employee10.getName(), 2);
         employeeBook.deleteEmployee(employee5);
         employeeBook.deleteEmployee(employee5);
@@ -39,8 +39,8 @@ public class KursachCourse1 {
         System.out.println(employeeBook.calculateAverageSpendings());
         employeeBook.printAllEmployeesNames();
         employeeBook.changeAllSalaries(10);
-        System.out.println(employeeBook.findMinSalaryDepartment(1).toString());
-        System.out.println(employeeBook.findMaxSalaryDepartment(1).toString());
+        System.out.println(employeeBook.findMinSalaryEmployeeOfDepartment(1).toString());
+        System.out.println(employeeBook.findMaxSalaryEmployeeOfDepartment(1).toString());
         System.out.println(employeeBook.calculateDepartmentSalarySpendings(1));
         System.out.println(employeeBook.calculateDepartmentAverageSalarySpendings(1));
         employeeBook.changeDepartmentSalaries(100,1);
